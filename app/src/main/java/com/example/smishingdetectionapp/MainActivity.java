@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.TextView;
-import android.os.Handler;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationManagerCompat;
@@ -18,15 +18,12 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.smishingdetectionapp.databinding.ActivityMainBinding;
 import com.example.smishingdetectionapp.detections.DatabaseAccess;
 import com.example.smishingdetectionapp.detections.DetectionsActivity;
-import com.example.smishingdetectionapp.ui.login.LoginActivity;
-
-
 import com.example.smishingdetectionapp.notifications.NotificationPermissionDialogFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends SharedActivity {
-    private AppBarConfiguration mAppBarConfiguration;
 
+    private AppBarConfiguration mAppBarConfiguration;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -35,8 +32,8 @@ public class MainActivity extends SharedActivity {
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_home, R.id.nav_news, R.id.nav_settings)
-                .build();
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.nav_news, R.id.nav_settings).build();
 
         if (!areNotificationsEnabled()) {
             showNotificationPermissionDialog();
@@ -78,25 +75,14 @@ public class MainActivity extends SharedActivity {
             startActivity(intent);
         });
 
-
-        // Database connection
+        // Database connection and counter
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
         databaseAccess.open();
-        //setting counter from result
-        TextView total_count;
-        total_count = findViewById(R.id.total_counter);
-        total_count.setText(""+databaseAccess.getCounter());
-        //closing the connection
-        //databaseAccess.close();
-        //TODO: Add functionality for new detections.
 
-        // Setting counter from the result
-        //TextView total_count = findViewById(R.id.total_counter);
-        //total_count.setText("" + databaseAccess.getCounter());
+        TextView total_count = findViewById(R.id.total_counter);
+        total_count.setText("" + databaseAccess.getCounter());
 
-        // Closing the connection
         databaseAccess.close();
-
     }
 
     private boolean areNotificationsEnabled() {

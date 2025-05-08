@@ -34,7 +34,9 @@ public class EducationActivity extends AppCompatActivity {
         quizButton.setOnClickListener(v -> {
             Intent intent = new Intent(EducationActivity.this, QuizesActivity.class);
             startActivity(intent);
+
         });
+
 
     }
 }
