@@ -74,6 +74,7 @@
         </activity>
         <activity android:name=".detections.YourReportsActivity" android:exported="false" />
         <activity android:name=".ReportingActivity" android:exported="false" />
+        <activity android:name=".VirusTotalScanner" />
 
         <!-- Messaging -->
         <activity android:name=".SmsActivity" android:exported="false" />
