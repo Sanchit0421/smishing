@@ -117,6 +117,8 @@
         <activity android:name=".QuizResultActivity" />
         <activity android:name=".QuizesActivity" />
 
+        <activity android:name=".QuestionActivity" /> <!-- Added activity -->
+
         <!-- Your Reports Activity-->
         <activity
             android:name=".detections.YourReportsActivity"
