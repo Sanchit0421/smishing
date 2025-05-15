@@ -89,7 +89,7 @@ public class MainActivity extends SharedActivity {
             finish();
         });
 
-        // Database connection
+        // Database connectio (n)
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
         databaseAccess.open();
 
