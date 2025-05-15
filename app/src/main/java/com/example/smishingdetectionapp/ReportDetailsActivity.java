@@ -4,10 +4,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -15,7 +18,8 @@ import com.google.gson.JsonParser;
 
 public class ReportDetailsActivity extends AppCompatActivity {
 
-    LinearLayout reportContainer;
+    private LinearLayout reportContainer;
+    private TextView textViewTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,19 +27,27 @@ public class ReportDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_report_details);
 
         reportContainer = findViewById(R.id.reportContainer);
+        textViewTitle = findViewById(R.id.textViewTitle);
+        ImageButton backButton = findViewById(R.id.BACK);
+
+        backButton.setOnClickListener(v -> finish());
 
         String reportJson = getIntent().getStringExtra("report");
         String title = getIntent().getStringExtra("title");
 
         if (reportJson != null) {
             if (title != null && title.contains("VirusTotal")) {
+                textViewTitle.setText("VirusTotal Report");
                 formatVirusTotalReport(reportJson);
             } else if (title != null && title.contains("Google Safe Browsing")) {
+                textViewTitle.setText("Google Safe Browsing Report");
                 formatGSBReport(reportJson);
             } else {
+                textViewTitle.setText("Unknown Report");
                 addSimpleText("Unknown report format.");
             }
         } else {
+            textViewTitle.setText("No Report Data");
             addSimpleText("No report data available.");
         }
     }

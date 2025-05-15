@@ -23,6 +23,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import java.io.IOException;
+import android.widget.ImageButton;
+
 
 public class VirusTotalScanner extends AppCompatActivity {
 
@@ -75,6 +77,9 @@ public class VirusTotalScanner extends AppCompatActivity {
 
             new ScanTask().execute(domain);
         });
+        ImageButton backButton = findViewById(R.id.backbuton);
+        backButton.setOnClickListener(v -> finish());
+
 
         buttonVTDetails.setOnClickListener(v -> showDetails("VirusTotal Report", vtFullJson));
         buttonGSBDetails.setOnClickListener(v -> showDetails("Google Safe Browsing Report", gsbFullJson));
